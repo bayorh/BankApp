@@ -30,6 +30,9 @@ namespace BankApp.Menu
                 case 4:
                     cont = false;
                     break;
+                case 5:
+                    DeleteTransaction();
+                    break;
                 default:
                     System.Console.WriteLine("invalid input");
                     break;
@@ -143,32 +146,57 @@ namespace BankApp.Menu
         }
 
     }
-        public void ViewAllUsers()
+    public void ViewAllUsers()
+    {
+        var users = userManager.GetAllUsers();
+        if (users.Count == 0)
         {
-            var users = userManager.GetAllUsers();
-            if (users.Count == 0)
-            {
-                Console.WriteLine("No profiles found.");
-                return;
-            }
-            Console.WriteLine("All Profiles:");
-            foreach (var user in users)
-            {
-                Console.WriteLine($"ID: {user.Id}, Name: {user.Firstname} {user.Lastname}, Email: {user.Email}, Role: {user.Role}");
-            }
+            Console.WriteLine("No profiles found.");
+            return;
         }
-        public void ViewAllProfiles()
+        Console.WriteLine("All Profiles:");
+        foreach (var user in users)
         {
-            var users = userManager.GetAllUsers();
-            if (users.Count == 0)
-            {
-                Console.WriteLine("No profiles found.");
-                return;
-            }
-            Console.WriteLine("All Profiles:");
-            foreach (var user in users)
-            {
-                Console.WriteLine($"ID: {user.Id}, Name: {user.Firstname} {user.Lastname}, Email: {user.Email}, Role: {user.Role}");
-            }
+            Console.WriteLine($"ID: {user.Id}, Name: {user.Firstname} {user.Lastname}, Email: {user.Email}, Role: {user.Role}");
         }
     }
+    public void ViewAllProfiles()
+    {
+        var users = userManager.GetAllUsers();
+        if (users.Count == 0)
+        {
+            Console.WriteLine("No profiles found.");
+            return;
+        }
+        Console.WriteLine("All Profiles:");
+        foreach (var user in users)
+        {
+            Console.WriteLine($"ID: {user.Id}, Name: {user.Firstname} {user.Lastname}, Email: {user.Email}, Role: {user.Role}");
+        }
+    }
+
+
+    public void DeleteTransactionMenu()
+    {
+        Console.Write("Enter the Transaction ID to delete: ");
+        if (!int.TryParse(Console.ReadLine(), out int transactionId))
+        {
+            Console.WriteLine("Invalid input. Please enter a valid transaction ID.");
+            return;
+        }
+
+        bool deleted = transactionManager.DeleteTransaction(transactionId);
+
+        if (deleted)
+        {
+            Console.WriteLine($"Transaction with ID {transactionId} was successfully deleted.");
+        }
+        else
+        {
+            Console.WriteLine($"Transaction with ID {transactionId} not found or could not be deleted.");
+        }
+    }
+
+}
+
+    
