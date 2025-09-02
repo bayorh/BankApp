@@ -43,14 +43,14 @@ namespace BankApp.Manager
             File.Move(temp, path, overwrite: true);
         }
 
-        public T? Deserialize(string path)
+        public List<T>? DeserializeToList(string path)
         {
             if (!File.Exists(path)) return default;
 
             using var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
             try
             {
-                var obj = JsonSerializer.Deserialize<T>(fs, _options);
+                var obj = JsonSerializer.Deserialize<List<T>>(fs, _options);
                 return obj;
             }
             catch (JsonException)

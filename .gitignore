@@ -484,7 +484,6 @@ $RECYCLE.BIN/
 *.swp
 
 
-/bin
-/obj
+bin/
+obj/
 .vscode
-/vscode

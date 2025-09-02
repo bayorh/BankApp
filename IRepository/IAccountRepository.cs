@@ -4,7 +4,7 @@ namespace bankApp.IRepository
 {
     public interface IAccountRepository : IBaseRepository<Account>
     {
-        Task<Account?> GetByAccountNumberAsync(string accountNumber);
-        Task<IReadOnlyList<Account>> GetByCustomerIdAsync(string customerId);
+        Account? GetByAccountNumber(int accountNumber);
+        IReadOnlyList<Account> GetByCustomerId(int customerId);
     }
 }

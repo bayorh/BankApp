@@ -4,6 +4,6 @@ namespace bankApp.IRepository
 {
     public interface IBankConfigRepository : IBaseRepository<BankConfig>
     {
-        Task<BankConfig> GetSingletonAsync();
+        BankConfig GetSingleton();
     }
 }

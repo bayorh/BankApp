@@ -4,6 +4,6 @@ namespace bankApp.IRepository
 {
     public interface ITransactionRepository : IBaseRepository<Transaction>
     {
-        Task<IReadOnlyList<Transaction>> GetByAccountIdAsync(string accountId, DateTime? start = null, DateTime? end = null);
+        IReadOnlyList<Transaction> GetByAccountIdA(string accountId, DateTime? start = null, DateTime? end = null);
     }
 }

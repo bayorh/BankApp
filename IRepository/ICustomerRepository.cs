@@ -4,6 +4,6 @@ namespace bankApp.IRepository
 {
     public interface ICustomerRepository : IBaseRepository<Customer>
     {
-        Task<Customer?> GetByEmailAsync(string email);
+        Customer? GetByEmail(string email);
     }
 }

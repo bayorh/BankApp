@@ -7,7 +7,7 @@ namespace bankapp.Entities
         {
 
         }
-        public decimal LoantLimit { get; set; } = 0m;
+        public decimal LoanLimit { get; set; } = 0m;
     }
 
 }
