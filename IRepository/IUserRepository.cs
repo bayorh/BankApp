@@ -2,13 +2,8 @@ using BankApp.Entities;
 
 namespace bankApp.IRepository
 {
-    public interface IUserRepository
+    public interface IUserRepository: IBaseRepository<User>
     {
-        User AddUser(User user);
-        User UpdateUser(User user);
-        User? GetUser(int id);
-        List<User> GetAllUsers();
-        void DeleteUser(int id);
-        int Counter();
+       
     }
 }
