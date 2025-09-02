@@ -1,6 +1,6 @@
 
+using bankapp.Repositories;
 using bankApp.IRepository;
-using BankApp.Data;
 using BankApp.Entities;
 using BankApp.IServices;
 
@@ -11,7 +11,7 @@ namespace BankApp.Manager
         private readonly IUserRepository _userRepository;
         public UserManager()
         {
-            _userRepository = new UserDb();
+            _userRepository = new UserRepository();
         }
         public User Register(string firstname, string lastname, string email, string password)
         {
@@ -21,6 +21,7 @@ namespace BankApp.Manager
                 System.Console.WriteLine("user already exist");
                 return null;
             }
+           
             int id = _userRepository.Counter() + 1;
             User user = new User(
                 id,
@@ -78,53 +79,53 @@ namespace BankApp.Manager
             return false;
         }
 
-        public User ViewTransactions(int Id, int account)
-        {
-            var transactions = GetTransactions(Id, account);
+        // public User ViewTransactions(int Id, int account)
+        // {
+        //     var transactions = GetTransactions(Id, account);
 
-            foreach (var transaction in transactions)
-            {
-                Console.WriteLine($"Transaction ID: {transaction.Id}");
-                Console.WriteLine($"Date: {transaction.Date}");
-                Console.WriteLine($"Amount: {transaction.Amount}");
-                Console.WriteLine($"Description: {transaction.Description}");
-                Console.WriteLine("------------------------");
-            }
-        }
+        //     foreach (var transaction in transactions)
+        //     {
+        //         Console.WriteLine($"Transaction ID: {transaction.Id}");
+        //         Console.WriteLine($"Date: {transaction.Date}");
+        //         Console.WriteLine($"Amount: {transaction.Amount}");
+        //         Console.WriteLine($"Description: {transaction.Description}");
+        //         Console.WriteLine("------------------------");
+        //     }
+        // }
 
         public List<User> GetAllUsers()
         {
-            return UserDb.UserDatabase;
+            throw new
         }
 
         public void BuyAirtime()
-    {
-        Console.WriteLine("Choose Network Provider:");
-        Console.WriteLine("1. MTN");
-        Console.WriteLine("2. Airtel");
-        Console.WriteLine("3. Glo");
-        Console.WriteLine("4. 9mobile");
-        int choice = int.Parse(Console.ReadLine());
-
-        string[] providers = { "MTN", "Airtel", "Glo", "9mobile" };
-        string selectedProvider = providers[choice - 1];
-
-        Console.WriteLine("Enter Phone Number:");
-        string phoneNumber = Console.ReadLine();
-
-        Console.WriteLine("Enter Amount:");
-        double amount = double.Parse(Console.ReadLine());
-
-        if (Balance >= amount)
         {
-            Balance -= amount;
-            Console.WriteLine($"Airtime purchase successful!");
-            Console.WriteLine($"Successfully bought {amount} for {phoneNumber} on {selectedProvider}.");
+            Console.WriteLine("Choose Network Provider:");
+            Console.WriteLine("1. MTN");
+            Console.WriteLine("2. Airtel");
+            Console.WriteLine("3. Glo");
+            Console.WriteLine("4. 9mobile");
+            int choice = int.Parse(Console.ReadLine());
+
+            string[] providers = { "MTN", "Airtel", "Glo", "9mobile" };
+            string selectedProvider = providers[choice - 1];
+
+            Console.WriteLine("Enter Phone Number:");
+            string phoneNumber = Console.ReadLine();
+
+            Console.WriteLine("Enter Amount:");
+            double amount = double.Parse(Console.ReadLine());
+
+            if (Balance >= amount)
+            {
+                Balance -= amount;
+                Console.WriteLine($"Airtime purchase successful!");
+                Console.WriteLine($"Successfully bought {amount} for {phoneNumber} on {selectedProvider}.");
+            }
+            else
+            {
+                Console.WriteLine("Insufficient Funds. Please Top Up Your Account.");
+            }
         }
-        else
-        {
-            Console.WriteLine("Insufficient Funds. Please Top Up Your Account.");
-        }
-    }
     }
 }

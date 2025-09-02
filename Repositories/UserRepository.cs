@@ -21,18 +21,28 @@ namespace bankapp.Repositories
         }
         public User AddUser(User user)
         {
-            _serializer.Serialize(user, _dbPath);
+            var users = GetAllUsers();
+            users.Add(user);
+            _serializer.Serialize(users, _dbPath);
             return user;
         }
 
         public int Counter()
         {
-            throw new NotImplementedException();
+            return GetAllUsers().Count();
         }
 
         public void DeleteUser(int id)
         {
-            throw new NotImplementedException();
+            var users = GetAllUsers();
+            foreach (var user in users)
+            {
+                if (user.Id == id)
+                {
+                    users.Remove(user);
+                    _serializer.Serialize(users, _dbPath);
+                }
+            }
         }
 
         public List<User> GetAllUsers()
@@ -53,11 +63,24 @@ namespace bankapp.Repositories
             }
             return null;
         }
-        
+
 
         public User UpdateUser(User user)
         {
-            throw new NotImplementedException();
+            var users = _serializer.DeserializeToList(_dbPath);
+            foreach (var _user in users)
+            {
+                if (_user.Id == user.Id)
+                {
+                    var index = users.IndexOf(_user);
+                    _user.Role = user.Role;
+                    var u = _user;
+                    users.Remove(_user);
+                    users.Insert(index, u);
+                    return u;
+                }
+            }
+            return user;
         }
     }
 }

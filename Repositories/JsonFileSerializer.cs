@@ -23,7 +23,7 @@ namespace BankApp.Manager
         /// <summary>
         /// Serialize to a temp file then atomically move to target path.
         /// </summary>
-        public void Serialize(T obj, string path)
+        public void Serialize(List<T> obj, string path)
         {
             var temp = path + ".tmp";
 
@@ -38,7 +38,6 @@ namespace BankApp.Manager
                     fs.Flush(); // try to flush to disk
                 }
             }
-
             // Atomic replace: overwrite destination if it exists
             File.Move(temp, path, overwrite: true);
         }

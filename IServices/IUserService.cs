@@ -4,7 +4,6 @@ namespace BankApp.IServices
 {
     public interface IUserService
     {
-
         User? GetUserById(int userId);
         User? UpdateProfile(int userId, string newFirstname,
          string newLastname, string newEmail);
